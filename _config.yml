@@ -2,11 +2,11 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://yoursite.com
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
-author: Your Name
-simple_search: https://www.google.com/search
+url: http://kokutoukiritsugu.github.io
+title: kokutou kiritsugu's blog
+subtitle: sometime, something, some codes.(kokutoukiritsugu@gmail.com)
+author: 黑桐切嗣
+simple_search: http://google.com/search
 description:
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
@@ -91,8 +91,8 @@ delicious_user:
 delicious_count: 3
 
 # Disqus Comments
-disqus_short_name:
-disqus_show_comment_count: false
+disqus_short_name: kokutoukiritsugu
+disqus_show_comment_count: true
 
 # Google Analytics
 google_analytics_tracking_id:
