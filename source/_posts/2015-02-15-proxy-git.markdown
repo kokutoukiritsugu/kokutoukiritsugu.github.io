@@ -5,9 +5,9 @@ date: 2015-02-15 22:07:45 +0800
 comments: true
 categories: 
 ---
-环境 archlinux + zsh
+环境 archlinux + zsh  
 
-git直连的时候也不是不能正常工作，就是特慢，实在不能忍。。。
+git直连的时候也不是不能正常工作，就是特慢，实在不能忍。。。  
 以下为代理方法,直接加入到.zshrc：
 
     # 设定http和https代理，指向GoAgent
@@ -22,26 +22,26 @@ git直连的时候也不是不能正常工作，就是特慢，实在不能忍�
     # 全局设定
     git config --global http.sslVerify false
 
-完了之后 yaourt -S xxx 会出现 curl 证书错误
+完了之后 yaourt -S xxx 会出现 curl 证书错误  
 修正方法：
 
     # 让curl永久忽略SSL错误
     echo insecure >> ~/.curlrc
 
-我这样做却无效。。。
+我这样做却无效。。。  
 google之后发现还是要手动装证书= =
 
     ca-certificates update
     https://www.archlinux.org/news/ca-certificates-update/
 
-archlinux 2014-12-11之后ca的安装方法改变了
+archlinux 2014-12-11之后ca的安装方法改变了  
 
 以下新的安装方法：
 
     复制 goagent/local/CA.crt /etc/ca-certificates/trust-source/anchors/
     运行 trust extract-compat
 
-然后 curl 就ok了~
+然后 curl 就ok了~  
 
 
 啊，rake gen_deploy 飞速~

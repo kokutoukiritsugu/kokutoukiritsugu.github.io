@@ -11,6 +11,7 @@ markdown 的代码语法就是简单的前面加四个空格。
     markdown前面四个空格。
 
 vi的替换如下：
+
     :%s/someword/someword/g
 
 说明：  

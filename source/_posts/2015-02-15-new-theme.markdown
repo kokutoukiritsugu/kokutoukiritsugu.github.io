@@ -1,0 +1,18 @@
+---
+layout: post
+title: "换了个新主题 Slash"
+date: 2015-02-15 21:16:23 +0800
+comments: true
+categories: 
+---
+
+升级了 octopress 3 顺便换个主题~
+
+    cd 你的octopress本地代码库
+    git clone git://github.com/tommy351/Octopress-Theme-Slash.git .themes/slash
+    rake install\['slash'\]
+    rake gen_deploy
+
+上面里面的\\\[是因为我用的zsh，\] 和 \[ 必须转义，话说 zsh 咋这么蛋疼。。。
+
+
