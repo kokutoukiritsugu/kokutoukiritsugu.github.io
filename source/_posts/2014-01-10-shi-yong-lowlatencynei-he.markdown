@@ -9,9 +9,7 @@ categories:
 这个是因为ubuntu默认的generic内核是非实时内核。  
 
 开始想装实时内核来着，后来在
-
     sudo apt-get install linux-image-[tab]
-
 的时候发现有 linux-image-3.11.10-15-lowlatency 内核。  
 google发现这个低延迟内核是可以大幅降低操作延时的。  
 具体几个内核的区别见：[UbuntuStudio/RealTimeKernel](https://help.ubuntu.com/community/UbuntuStudio/RealTimeKernel)  
