@@ -17,6 +17,10 @@ git直连的时候也不是不能正常工作，就是特慢，实在不能忍�
     # 让git clone时忽略SSL错误
     export GIT_SSL_NO_VERIFY=true
 
+当然，不用上面的全局方法，只让git通过代理也是可以的。
+
+    git config --global http.proxy http://127.0.0.1:8087
+
 以下运行一次~
 
     # 全局设定
