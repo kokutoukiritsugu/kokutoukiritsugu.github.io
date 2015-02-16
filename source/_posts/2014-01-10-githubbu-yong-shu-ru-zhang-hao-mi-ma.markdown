@@ -3,7 +3,7 @@ layout: post
 title: "git push不用输入帐号密码"
 date: 2014-01-10 15:42:30 +0800
 comments: true
-categories: 
+categories: git
 ---
 首先看看有没有sshkey：
 

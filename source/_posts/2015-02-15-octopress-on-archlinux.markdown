@@ -3,7 +3,7 @@ layout: post
 title: "archlinux 上搭建 octopress 环境 和 升级到 octopress 3.0"
 date: 2015-02-15 20:40:11 +0800
 comments: true
-categories: 
+categories: octopress
 ---
 
 之前在 ubuntu 上用的 octopress ，后来好长时间没使用了，现在新装了 arch，  

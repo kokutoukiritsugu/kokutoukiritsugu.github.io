@@ -3,7 +3,7 @@ layout: post
 title: "markdown代码语法和vi的替换"
 date: 2014-01-10 15:52:20 +0800
 comments: true
-categories: 
+categories: markdown
 ---
 markdown 的代码语法就是简单的前面加四个空格。  
 就会像下面这样显示了：

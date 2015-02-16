@@ -3,7 +3,7 @@ layout: post
 title: "换了个新主题 Slash"
 date: 2015-02-15 21:16:23 +0800
 comments: true
-categories: 
+categories: octopress
 ---
 
 升级了 octopress 3 顺便换个主题~

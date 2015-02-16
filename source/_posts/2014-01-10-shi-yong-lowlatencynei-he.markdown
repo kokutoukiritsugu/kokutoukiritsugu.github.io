@@ -3,7 +3,7 @@ layout: post
 title: "使用lowlatency内核"
 date: 2014-01-10 23:50:58 +0800
 comments: true
-categories: 
+categories: ubuntu
 ---
 用ubuntu13.10的时候，在鼠标点击，或者键盘切换的时候总有点迟滞感。  
 这个是因为ubuntu默认的generic内核是非实时内核。  

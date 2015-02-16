@@ -3,7 +3,7 @@ layout: post
 title: "ubuntu 13.10 grub4dos引导grub2"
 date: 2014-01-15 11:10:46 +0800
 comments: true
-categories: 
+categories: ubuntu
 ---
 
 我是用的gurb4dos管理机器上所有操作系统的。  

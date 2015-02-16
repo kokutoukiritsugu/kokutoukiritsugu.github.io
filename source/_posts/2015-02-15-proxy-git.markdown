@@ -3,7 +3,7 @@ layout: post
 title: "使用goagent代理git"
 date: 2015-02-15 22:07:45 +0800
 comments: true
-categories: 
+categories: git
 ---
 环境 archlinux + zsh  
 
@@ -23,10 +23,10 @@ git直连的时候也不是不能正常工作，就是特慢，实在不能忍�
 
 以下运行一次~
 
-    # 全局设定
+    # git的全局设定，关闭ssl验证
     git config --global http.sslVerify false
 
-完了之后 yaourt -S xxx 会出现 curl 证书错误  
+用全局代理的话，完了之后 yaourt -S xxx 会出现 curl 证书错误  
 修正方法：
 
     # 让curl永久忽略SSL错误
@@ -39,6 +39,7 @@ google之后发现还是要手动装证书= =
     https://www.archlinux.org/news/ca-certificates-update/
 
 archlinux 2014-12-11之后ca的安装方法改变了  
+[链接](https://www.archlinux.org/news/ca-certificates-update/)
 
 以下新的安装方法：
 
