@@ -70,11 +70,22 @@ xorg 装完可以启动下试试，看看能不能正常使用，
 
 ## 配置 vi 指向 vim
 archlinux 自带一个 vi ，但真的非常不好用，  
-虽然在 ```.zshrc``` 里加入 ```alias vi=vim``` 之后，当前用户可以了，  
-但是 sudo vi 之后，又变成了那个阉割版的 vi ，  
-简单粗暴的，直接链接下 vim 到 vi 了，
+~~虽然在 ```.zshrc``` 里加入 ```alias vi=vim``` 之后，当前用户可以了，~~  
+~~但是 sudo vi 之后，又变成了那个阉割版的 vi ，~~  
+~~简单粗暴的，直接链接下 vim 到 vi 了，~~
 
-    ln -s /usr/bin/vim /usr/local/bin/vi
+~~ln -s /usr/bin/vim /usr/local/bin/vi~~
+
+卸掉：
+
+    pacman -R vi
+
+加入以下 alias
+
+    alias vi=vim
+    alias sudo='sudo '
+    alias 'sudo vi'='sudo vim'
+
 
 ## 安装 fcitx 的一些组件  
 拼音输入法我选的是 rime ，在 osx 下用了很久了，就这个了。
