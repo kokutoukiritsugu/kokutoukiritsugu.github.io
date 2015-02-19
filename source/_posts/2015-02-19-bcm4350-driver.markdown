@@ -1,0 +1,56 @@
+---
+layout: post
+title: "Archlinux 下 BCM4352 驱动加载"
+date: 2015-02-19 15:08:23 +0800
+comments: true
+categories: archlinux
+---
+gnome 装完后发现没 wifi ，```ip link```看了发现只有有线和本地 lo 回环。  
+于是 lspci 一下发现网卡在，
+
+    lspci -vnn | grep Bro
+    
+    03:00.0 Network controller [0280]: Broadcom Corporation BCM4352 802.11ac Wireless Network Adapter [14e4:43b1] (rev 03)
+
+我想不会要找驱动吧，google了一下  
+搜到了这个  
+[broadcom-w](https://wiki.archlinux.org/index.php/broadcom_wireless#broadcom-wl)  
+博通看起来有几个不同的驱动啊。  
+照着里面的试了下。  
+先卸载内核模块
+
+    rmmod b43
+    rmmod ssb
+
+我机子上这俩都没加载  
+直接加载另外的模块：
+
+    modprobe wl
+
+wl会自动加载以下的俩模块，没加载就要手动加载。
+
+    modprobe lib80211
+    modprobe lib80211_crypt_tkip
+
+```ip link``` 看看，发现wifi起来了。
+
+    2: wlp3s0: <NO-CARRIER,BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state DORMANT mode DORMANT group default qlen 1000
+    link/ether 00:6b:9e:06:1d:8c brd ff:ff:ff:ff:ff:ff
+
+那就ok了。  
+
+然后就是屏蔽模块和自动加载 wl 了。  
+/etc/modprobe.d/ 下面放个 nob43.conf ，里面写上
+
+    blacklist b43
+    blacklist ssb
+
+然后在/etc/modules-load.d/ 下面放个 wl.conf ，里面写上：
+
+    wl
+    lib80211
+    lib80211_crypt_tkip
+
+这就ok了。  
+
+
