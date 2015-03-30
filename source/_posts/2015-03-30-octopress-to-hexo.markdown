@@ -42,11 +42,11 @@ github 重命名远程分支是先删除远程分支，再重命名本地分支�
 
 开始安装 hexo
 
-    npm install hexo-cli
+    npm install hexo-cli -g
     npm install hexo --save
     hexo init .
     npm install
-    npm install hexo-deployer-git
+    npm install hexo-deployer-git --save
     
 这就安装完成了。  
 接下来是主题的安装，还有设置。  
