@@ -38,7 +38,8 @@ github 重命名远程分支是先删除远程分支，再重命名本地分支�
 然后推送到 github 上面。
 
     git add --all .
-    git push origin hexo
+    git push --set-upstream origin hexo
+    git push
 
 开始安装 hexo
 
