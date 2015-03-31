@@ -10,16 +10,16 @@ tags:
 这是因为 hexo 和 octopress 的地址略有不一样。  
   
 比如原来 octopress 是：
-
-    http://kokutoukiritsugu.github.io/blog/2015/03/30/octopress-to-hexo/
-
+```raw
+http://kokutoukiritsugu.github.io/blog/2015/03/30/octopress-to-hexo/
+```
 现在 hexo 是：
-
-    http://kokutoukiritsugu.github.io/2015/03/30/octopress-to-hexo/
-
+```raw
+http://kokutoukiritsugu.github.io/2015/03/30/octopress-to-hexo/
+```
 hexo 相比 octopress 的 url 少了一个 /blog  
   
-disqus 有个 [url mapper](https://kokutoukiritsugu.disqus.com/admin/discussions/migrate/)  
+disqus 有个 [url mapper](https://disqus.com/admin/discussions/migrate/)  
 说明在此： [url mapper help](https://help.disqus.com/customer/portal/articles/912757-url-mapper)  
   
 当然它还有别的工具，我试了下这个比较顺手。。。  
