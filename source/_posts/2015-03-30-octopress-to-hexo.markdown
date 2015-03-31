@@ -115,6 +115,7 @@ scaffolds/post.md
 保存一下当前的配置和文章。
 
     git add --all .
+    git commit -m "somthing"
     git push
 
 enjoy.
