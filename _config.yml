@@ -65,14 +65,14 @@ disqus_shortname: kokutoukiritsugu
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: landscape
-#theme: light
+#theme: landscape
+theme: light
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: kokutoukiritsugu:kokutoukiritsugu/kokutoukiritsugu.github.io.git
+  repo: git@github.com:kokutoukiritsugu/kokutoukiritsugu.github.io.git
   branch: master
   message: Site updated {{ now("YYYY-MM-DD HH:mm:ss") }}
 
