@@ -28,7 +28,7 @@ i18n_dir: :lang
 skip_render:
 
 # Writing
-new_post_name: :year-:month-:day-:title.markdown
+new_post_name: :year-:month-:day-:title.markdown # File name of new posts
 default_layout: post
 titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
@@ -65,8 +65,7 @@ disqus_shortname: kokutoukiritsugu
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-#theme: landscape
-theme: light
+theme: landscape
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
@@ -75,4 +74,3 @@ deploy:
   repo: git@github.com:kokutoukiritsugu/kokutoukiritsugu.github.io.git
   branch: master
   message: Site updated {{ now("YYYY-MM-DD HH:mm:ss") }}
-
