@@ -1,0 +1,207 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>使用lowlatency内核 | kokutou kiritsugu&#39;s blog</title>
+  <meta name="author" content="黑桐切嗣">
+  
+  <meta name="description" content="用ubuntu13.10的时候，在鼠标点击，或者键盘切换的时候总有点迟滞感。这个是因为ubuntu默认的generic内核是非实时内核。  
+开始想装实时内核来着，后来在
+sudo apt-get install linux-image-[tab]
+的时候发现有 linux-image-3.11.1">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="使用lowlatency内核"/>
+  <meta property="og:site_name" content="kokutou kiritsugu&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="kokutou kiritsugu&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">kokutou kiritsugu&#39;s blog</a></h1>
+  <h2><a href="/">sometime, something, some codes.(kokutoukiritsugu@gmail.com)</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-01-10T15:50:58.000Z"><a href="/2014/01/10/shi-yong-lowlatencynei-he/">2014-01-10</a></time>
+      
+      
+  
+    <h1 class="title">使用lowlatency内核</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>用ubuntu13.10的时候，在鼠标点击，或者键盘切换的时候总有点迟滞感。<br>这个是因为ubuntu默认的generic内核是非实时内核。  </p>
+<p>开始想装实时内核来着，后来在</p>
+<pre><code>sudo apt-get install linux-image-[tab]
+</code></pre><p>的时候发现有 linux-image-3.11.10-15-lowlatency 内核。<br>google发现这个低延迟内核是可以大幅降低操作延时的。<br>具体几个内核的区别见：<a href="https://help.ubuntu.com/community/UbuntuStudio/RealTimeKernel" target="_blank" rel="external">UbuntuStudio/RealTimeKernel</a><br>里面有内核介绍和内核的选择说明。  </p>
+<p>安装lowlatency内核：</p>
+<pre><code>sudo apt-get install linux-image-[tab]
+</code></pre><p>选你当前内核版本的lowlatency内核</p>
+<pre><code>sudo apt-get install linux-image-x.xx.x-xx-lowlatency
+</code></pre><p>安装完后发现提示没有内核的headers，把headers也装上</p>
+<pre><code>sudo apt-get install linux-headers-[tab]
+</code></pre><p>一样选择对应版本的headers</p>
+<pre><code>sudo apt-get install linux-headers-x.xx.x-xx-lowlatency
+</code></pre><p>重启后进入grub2选择页的时候选下面的<strong>高级启动选项</strong><br>进去后选新装上的 -lowlatency 内核启动即可。<br>lowlatency内核关chrome页面的时候再也没有迟滞感了，Alt+Tab秒切有木有！  </p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/ubuntu/">ubuntu</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://kokutoukiritsugu.github.io/2014/01/10/shi-yong-lowlatencynei-he/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:kokutoukiritsugu.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Kategorien</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/android/">android</a><small>2</small></li>
+  
+    <li><a href="/categories/archlinux/">archlinux</a><small>3</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>3</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>2</small></li>
+  
+    <li><a href="/categories/markdown/">markdown</a><small>1</small></li>
+  
+    <li><a href="/categories/octopress/">octopress</a><small>3</small></li>
+  
+    <li><a href="/categories/ubuntu/">ubuntu</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 黑桐切嗣
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'kokutoukiritsugu';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

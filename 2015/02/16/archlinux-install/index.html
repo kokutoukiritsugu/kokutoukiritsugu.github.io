@@ -1,0 +1,284 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Archlinux-2015.02.01 安装 | kokutou kiritsugu&#39;s blog</title>
+  <meta name="author" content="黑桐切嗣">
+  
+  <meta name="description" content="准备安装之前有装有 ubuntu ，分给 / 有 50g ，然后因为我有 16G 内存，swap 就只分了 512M ，现在发现就是可能没法休眠，因为 swap 太小了放不下内存的数据。。分区状态：
+sda           8:0    0 238.5G  0 disk  
+├─sda1    ">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Archlinux-2015.02.01 安装"/>
+  <meta property="og:site_name" content="kokutou kiritsugu&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="kokutou kiritsugu&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">kokutou kiritsugu&#39;s blog</a></h1>
+  <h2><a href="/">sometime, something, some codes.(kokutoukiritsugu@gmail.com)</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-16T12:43:10.000Z"><a href="/2015/02/16/archlinux-install/">2015-02-16</a></time>
+      
+      
+  
+    <h1 class="title">Archlinux-2015.02.01 安装</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="准备安装"><a href="#准备安装" class="headerlink" title="准备安装"></a>准备安装</h2><p>之前有装有 ubuntu ，分给 / 有 50g ，然后因为我有 16G 内存，<br>swap 就只分了 512M ，现在发现就是可能没法休眠，因为 swap 太小了放不下内存的数据。。<br>分区状态：</p>
+<pre><code>sda           8:0    0 238.5G  0 disk  
+├─sda1        8:1    0   384M  0 part  /boot/efi
+├─sda2        8:2    0   128M  0 part  
+├─sda3        8:3    0    99G  0 part  
+├─sda4        8:4    0  88.5G  0 part  
+├─sda5        8:5    0  49.5G  0 part  /
+└─sda6        8:6    0   512M  0 part  [SWAP]
+sdb           8:16   0 931.5G  0 disk  
+└─md126       9:126  0 931.5G  0 raid1 
+  └─md126p1 259:0    0 931.5G  0 md    /run/media/kokutou/HitachiRaid1
+sdc           8:32   0 119.2G  0 disk  
+├─sdc1        8:33   0   382M  0 part  
+└─sdc2        8:34   0 118.6G  0 part  
+sdd           8:48   0 931.5G  0 disk  
+└─md126       9:126  0 931.5G  0 raid1 
+  └─md126p1 259:0    0 931.5G  0 md    /run/media/kokutou/HitachiRaid1
+</code></pre><p>sda 是个 256g 的固态，放了win7，<br>然后分区表是 gpt ，<br>sda1 是 efi 分区，<br>sda2 是微软的保留分区，<br>sda3 是 win7 系统盘，<br>sda4 是win7 下的 D 盘。<br>sda5 装了 ubuntu ，安装的时候就不用分区了，直接格式化掉就行了。  </p>
+<h2 id="写入安装镜像"><a href="#写入安装镜像" class="headerlink" title="写入安装镜像"></a>写入安装镜像</h2><p>找了个 4g 的 u盘 ，直接用 dd 把镜像给写进去了。<br>用的是 windows 下的 cygwin 里面的 dd ，没用那个 安装助手，安装助手 在 uefi 下面没一个能启动的。。。  </p>
+<p>cygwin 下用 dd 不能用卷标，得 <code>cat/proc/partitions</code> 来得到 类似 /dev/sdx 的磁盘路径才行。<br><em>不要搞错，否则数据就没了 ^_^</em><br>写入命令是：  </p>
+<pre><code>dd if=image.iso of=/dev/sdx（你的u盘） bs=4M
+</code></pre><p>然后重启选择u盘启动，就进到 shell 可以开始安装了。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>基本就是参考 wiki 上的来的。  </p>
+<p>键盘布局我没设置。<br>终端字体我也没设置。  </p>
+<p>locale 设置了下，注释掉了 en_US.UTF-8 和 zh_CN.<em> 和 zh_HK.</em><br>如下：</p>
+<pre><code>en_US.UTF-8 UTF-8
+zh_CN.UTF-8 UTF-8  
+zh_CN.GB18030 GB18030  
+zh_CN.GBK GBK 
+zh_CN GB2312  
+zh_TW.UTF-8 UTF-8  
+zh_TW.EUC-TW EUC-TW  
+zh_TW BIG5  
+</code></pre><p>然后 <code>locale-gen</code> 就行了。</p>
+<h2 id="联网"><a href="#联网" class="headerlink" title="联网"></a>联网</h2><p>我有线连的路由器，ping 一下 www.baidu.com ，没通就 <code>dhcpcd</code>一下来自动获取 ip ，稍等一会，再 ping 就通了。</p>
+<h2 id="格式化分区"><a href="#格式化分区" class="headerlink" title="格式化分区"></a>格式化分区</h2><p>lsblk 看一下，然后格式化之前的 ubuntu 分区，再挂载，最后建立挂载表。</p>
+<pre><code>sda      8:0    0 238.5G  0 disk 
+├─sda1   8:1    0   384M  0 part /boot/efi
+├─sda2   8:2    0   128M  0 part 
+├─sda3   8:3    0    99G  0 part 
+├─sda4   8:4    0  88.5G  0 part 
+├─sda5   8:5    0  49.5G  0 part /
+└─sda6   8:6    0   512M  0 part [SWAP]
+</code></pre><p>/dev/sda1 是 efi , /dev/sda5 是根分区，/dev/sda6 是 swap 分区。</p>
+<pre><code>mkfs.ext4 /dev/sda5
+mkswap /dev/sda6
+swapon /dev/sda6
+</code></pre><h2 id="挂载分区"><a href="#挂载分区" class="headerlink" title="挂载分区"></a>挂载分区</h2><p>我的home和boot就都放在根分区下了。<br>顺便把efi挂上去。</p>
+<pre><code>mount /dev/sda5 /mnt
+mkdir /mnt/home
+mkdir /mnt/boot
+mkdir /mnt/boot/efi
+mount /dev/sda1 /mnt/boot/efi
+</code></pre><h2 id="编辑源列表"><a href="#编辑源列表" class="headerlink" title="编辑源列表"></a>编辑源列表</h2><p>用 vi 把 /etc/pacman.d/mirrorlist 里面的 163 的源放到第一个就行了。</p>
+<h2 id="安装基本系统"><a href="#安装基本系统" class="headerlink" title="安装基本系统"></a>安装基本系统</h2><pre><code>pacstrap -i /mnt base base-devel
+</code></pre><h2 id="生成-fstab"><a href="#生成-fstab" class="headerlink" title="生成 fstab"></a>生成 fstab</h2><pre><code>genfstab -U -p /mnt &gt;&gt; /mnt/etc/fstab
+</code></pre><p>完了检查下 fstab ，看看是不是对的。</p>
+<h2 id="Chroot-到新系统，并配置系统"><a href="#Chroot-到新系统，并配置系统" class="headerlink" title="Chroot 到新系统，并配置系统"></a>Chroot 到新系统，并配置系统</h2><pre><code>arch-chroot /mnt /bin/bash
+</code></pre><h2 id="locale"><a href="#locale" class="headerlink" title="locale"></a>locale</h2><p>编辑下 /etc/locale.gen 注释掉几个 utf-8 的项目。</p>
+<pre><code>en_US.UTF-8 UTF-8
+zh_CN.UTF-8 UTF-8
+zh_TW.UTF-8 UTF-8
+</code></pre><p>然后 <code>locale-gen</code><br>设置 locale：</p>
+<pre><code>echo LANG=en_US.UTF-8 &gt; /etc/locale.conf
+</code></pre><h2 id="字体和键盘映射跳过，除非是非英语"><a href="#字体和键盘映射跳过，除非是非英语" class="headerlink" title="字体和键盘映射跳过，除非是非英语"></a>字体和键盘映射跳过，除非是非英语</h2><h2 id="时区"><a href="#时区" class="headerlink" title="时区"></a>时区</h2><p>这个 archlinux 是建议用 utc 时间的，不过 windows 是用的本地时间，<br>然后 osx 默认也是用的 utc 时间，之前我 osx 和 windows 是时间差是用的 osx 下面的一个开机修改时间的小脚本弄的，现在想了想就还是把 windows 修改成 utc 时间，再删掉 osx 那个小脚本好了。  </p>
+<ul>
+<li>修改 windows 为 utc 时间。*<br>打开 regedit ，在<code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation</code>项下面，新建一个名为 <code>RealTimeIsUniversal</code> 的 dword32 值 ，并赋值为 1 ，然后重启，再联网同步一下时间。<br>当然不用现在就做，装完或者装之前再弄都行。</li>
+</ul>
+<p>回到 linux<br>用 utc+8 的时区，比如上海。</p>
+<pre><code>ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+</code></pre><p>硬件时间，默认就是 utc ，可不用设置。<br>就算时间错了，设置好 windows utc 之后，windows 下同步一下，再进 linux 时间就对了。</p>
+<pre><code>hwclock --systohc --utc
+</code></pre><h2 id="hostname-主机名"><a href="#hostname-主机名" class="headerlink" title="hostname 主机名"></a>hostname 主机名</h2><pre><code>echo hostname &gt; /etc/hostname
+</code></pre><p>并且在 /etc/hosts 添加一样的主机名（这个好像不用做，不过我还是做了。</p>
+<pre><code>#&lt;ip-address&gt;   &lt;hostname.domain.org&gt;   &lt;hostname&gt;
+127.0.0.1       localhost.localdomain   localhost   *myhostname*
+::1             localhost.localdomain   localhost   *myhostname*
+</code></pre><h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><p>这个倒不用设置，要网的时候临时 dhcpcd 好了。</p>
+<h2 id="创建初始-ramdisk"><a href="#创建初始-ramdisk" class="headerlink" title="创建初始 ramdisk"></a>创建初始 ramdisk</h2><p>似乎这个自动做了，不用手动来一遍。</p>
+<pre><code>mkinitcpio -p linux
+</code></pre><h2 id="设置-root-密码"><a href="#设置-root-密码" class="headerlink" title="设置 root 密码"></a>设置 root 密码</h2><pre><code>passwd
+</code></pre><p>输入密码是没显示的，不是你键盘坏了。</p>
+<h2 id="安装-grub"><a href="#安装-grub" class="headerlink" title="安装 grub"></a>安装 grub</h2><p>由于是 uefi 启动，参数略有不一样。<br>/boot/efi 是之前挂载好了的efi分区 。</p>
+<pre><code>pacman -S grub efibootmgr
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch_grub --recheck
+</code></pre><p>然后生成 grub 配置文件就可以重启了。</p>
+<pre><code>grub-mkconfig -o /boot/grub/grub.cfg
+</code></pre><h2 id="卸载分区，重启系统"><a href="#卸载分区，重启系统" class="headerlink" title="卸载分区，重启系统"></a>卸载分区，重启系统</h2><p>重启的时候分区会自动卸载，直接重启就行了。。。</p>
+<pre><code>exit
+reboot
+</code></pre><h2 id="欢迎来到-archlinux"><a href="#欢迎来到-archlinux" class="headerlink" title="欢迎来到 archlinux"></a>欢迎来到 archlinux</h2><p>刚装完，啥都没有，不过这种很干净的感觉挺好的。。。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/archlinux/">archlinux</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://kokutoukiritsugu.github.io/2015/02/16/archlinux-install/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:kokutoukiritsugu.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Kategorien</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/android/">android</a><small>2</small></li>
+  
+    <li><a href="/categories/archlinux/">archlinux</a><small>3</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>3</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>2</small></li>
+  
+    <li><a href="/categories/markdown/">markdown</a><small>1</small></li>
+  
+    <li><a href="/categories/octopress/">octopress</a><small>3</small></li>
+  
+    <li><a href="/categories/ubuntu/">ubuntu</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 黑桐切嗣
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'kokutoukiritsugu';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

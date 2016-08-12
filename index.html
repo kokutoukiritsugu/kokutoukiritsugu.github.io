@@ -1,0 +1,772 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>kokutou kiritsugu&#39;s blog</title>
+  <meta name="author" content="黑桐切嗣">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+  <meta property="og:site_name" content="kokutou kiritsugu&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="kokutou kiritsugu&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">kokutou kiritsugu&#39;s blog</a></h1>
+  <h2><a href="/">sometime, something, some codes.(kokutoukiritsugu@gmail.com)</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-31T09:21:23.000Z"><a href="/2015/03/31/move-disqus-form-octopress-to-hexo/">2015-03-31</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/31/move-disqus-form-octopress-to-hexo/">octopress 迁移到 hexo 后，disqus 评论的转移</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>迁移过来后 disqus 的评论消失了。<br>这是因为 hexo 和 octopress 的地址略有不一样。  </p>
+<p>比如原来 octopress 是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://kokutoukiritsugu.github.io/blog/2015/03/30/octopress-to-hexo/</div></pre></td></tr></table></figure></p>
+<p>现在 hexo 是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://kokutoukiritsugu.github.io/2015/03/30/octopress-to-hexo/</div></pre></td></tr></table></figure></p>
+<p>hexo 相比 octopress 的 url 少了一个 /blog  </p>
+<p>disqus 有个 <a href="https://disqus.com/admin/discussions/migrate/" target="_blank" rel="external">url mapper</a><br>说明在此： <a href="https://help.disqus.com/customer/portal/articles/912757-url-mapper" target="_blank" rel="external">url mapper help</a>  </p>
+<p>当然它还有别的工具，我试了下这个比较顺手。。。<br>下下来 csv 文件，然后用 excel 打开，复制左边一列到右边<br>然后选中右边一列，只对右边一列做 查找与替换，删除掉所有的 blog/ ，再保存为 csv 文件上传就好了。  </p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-31T09:19:35.000Z"><a href="/2015/03/31/git-multi-user/">2015-03-31</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/31/git-multi-user/">git 在多账户的情况下使用 SSH 免密码操作</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>当然先去掉我以前设置的全局 email 和 name<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global --unset user.name</div><div class="line">git config --global --unset user.email</div></pre></td></tr></table></figure></p>
+<p>现在每个 repo 要设置自己的 email 和 name<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config user.name <span class="string">"你的name"</span></div><div class="line">git config user.email <span class="string">"你的email"</span></div></pre></td></tr></table></figure></p>
+<p>生成两个邮箱的 ssh key<br>生成的时候提示输入文件名的时候选择两个不同的文件，<br>提示输入密码就直接为空，目标是操作的时候免密码嘛。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C <span class="string">"github_email1"</span></div><div class="line">ssh-keygen -t rsa -C <span class="string">"github_email2"</span></div></pre></td></tr></table></figure></p>
+<p>现在在 ~/.ssh 下面有了这几个文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">id_rsa (对应的 github_email1)</div><div class="line">id_rsa.pub (对应的 github_email1)</div><div class="line">id_rsa_second (对应的 github_email2)</div><div class="line">id_rsa_second.pub (对应的 github_email2)</div></pre></td></tr></table></figure></p>
+<p>现在要在 github 网页上，分别登录两个账号，<br>复制两个账号对应的 .pub 文件内容到 github 网页上的 设置 ssh key  里面。  </p>
+<p>新建一个 ~/.ssh/config 配置文件<br>内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">host username1</div><div class="line">    hostname github.com</div><div class="line">    Port 22</div><div class="line">    User git</div><div class="line">    IdentityFile &quot;id_rsa的路径&quot;</div><div class="line"></div><div class="line">host username2</div><div class="line">    hostname github.com</div><div class="line">    Port 22</div><div class="line">    User git</div><div class="line">    IdentityFile &quot;id_rsa_second的路径&quot;</div></pre></td></tr></table></figure></p>
+<p>现在可以测试一下是否设置正确了。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssh -T username1</div><div class="line">ssh -T username2</div></pre></td></tr></table></figure></p>
+<p>看到了 Hi 你的用户名! You’ve 这行话，就说明 ssh 配置对了。<br>上面的 username1 和 username2 可以随便取，这两个是后面要用到的。  </p>
+<p>这时候可以开始设置 repo 用 ssh 的方式来连接 github 了<br>先看看原来的 remote 地址是什么<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote -v</div></pre></td></tr></table></figure></p>
+<p>得到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">origin https://github.com/你的账号/你的repo (fetch)</div><div class="line">origin https://github.com/你的账号/你的repo (push)</div></pre></td></tr></table></figure></p>
+<p>现在是多账户，这个 repo 用的是 username1 里面的 ssh key 那么 ssh 地址就应该是这样的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">username1:你的账号/你的repo</div></pre></td></tr></table></figure></p>
+<p>这个 username1 就是上面的 ~/.ssh/config 里面设置好的两个 host 名<br>git 设置的命令是：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote <span class="built_in">set</span>-url origin username1:你的账号/你的repo</div></pre></td></tr></table></figure></p>
+<p>当然因为前面去掉了全局账号和邮箱，这里就也要设置这个 repo 的账号和邮箱。  </p>
+<p>enjoy!</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-03-30T06:54:40.000Z"><a href="/2015/03/30/octopress-to-hexo/">2015-03-30</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/30/octopress-to-hexo/">迁移 octopress 到 hexo</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>最近在 windows 下折腾 cygwin 和 msys2 ，windows 下想用 linux 工具集真是不方便。<br>然后突然想起 octopress 了，这货要装 ruby 等等一堆东西，windows 下折腾，想想就醉了。<br>google 了下，打算切换到 hexo。<br>基于 node.js 的静态博客。而且还有生成速度很快的优点。  </p>
+<p>主要下载了 msysgit ， io.js （兼容 node.js ，某些情况速度更快，顺便可以试试 io.js）。<br>安装的时候 msysgit 提示环境变量的时候，选择的第二个，只把 git 添加到环境变量。<br>这样就可以到处使用了。<br>先是把原来的给 clone 下来。 顺便 checkout 出 source 分支。</p>
+<pre><code>git clone 博客github地址 博客文件夹
+cd 博客文件夹
+git checkout -t origin/source
+</code></pre><p>重命名 source 分支 为 octopress 来备份以前的博客源文件。<br>github 重命名远程分支是先删除远程分支，再重命名本地分支，然后再推送过去成为一个新的分支。  </p>
+<pre><code>git branch -m source octopress
+git push origin --delete source
+git branch --set-upstream-to origin/octopress
+git push
+</code></pre><p>现在可以新建一个  hexo 分支了。  </p>
+<pre><code>git branch hexo
+git checkout hexo
+</code></pre><p>原来的文章都在 source/_posts 下面。<br>因为我在 windows 下面，我就打开文件夹手动删掉了除 source/_posts 和 .git 这两个文件夹之外的其他文件。<br>然后推送到 github 上面。</p>
+<pre><code>git add --all .
+git push --set-upstream origin hexo
+git push
+</code></pre><p>开始安装 hexo</p>
+<pre><code>npm install hexo-cli -g
+npm install hexo --save
+hexo init .
+npm install
+npm install hexo-deployer-git --save
+</code></pre><p>这就安装完成了。<br>接下来是主题的安装，还有设置。<br>选了 light 主题，这个最简约，官网还有其他的可选。  </p>
+<pre><code>git submodule add git://github.com/tommy351/hexo-theme-light.git themes/light
+</code></pre><p>这个主题默认启用了 facebook 。<br>原来我用的是 disqus 的评论，所以这个主题要编辑一下设置。<br>在 theme/light/_config.yml 里面：</p>
+<pre><code>comment_provider: facebook 
+</code></pre><p>修改为  </p>
+<pre><code>comment_provider:
+</code></pre><p>配置 hexo<br>主要需要修改的就以下几项：</p>
+<pre><code>title: 博客标题
+subtitle: 子标题
+author: 名称
+
+url: 博客url
+
+new_post_name: :year-:month-:day-:title.markdown
+
+theme: light
+</code></pre><p>启用 disqus 评论需要加一行</p>
+<pre><code>disqus_shortname: kokutoukiritsugu
+</code></pre><p>以上这些都可以照着 octopress 原来的复制过来。<br>然后就是最后面的 deploy 部分，修改为 github 模式。</p>
+<pre><code>deploy:
+  type: git
+  repo: 你的git地址
+  branch: master
+  message: Site updated { { now(&quot;YYYY-MM-DD HH:mm:ss&quot;) } }
+</code></pre><p>上面这一行 大括号与大括号之间我加了个空格，否则 hexo 会生成失败。<br>然后可以预览试试了。</p>
+<pre><code>hexo g
+hexo s
+</code></pre><p>修改一下默认的新文章格式。<br>scaffolds/post.md</p>
+<p>修改为和 octopress 一样的。</p>
+<pre><code>---
+layout: post
+title: {{ title }}
+date: {{ date }}
+comments: true
+categories: 
+tags:
+---
+</code></pre><p>这样 hexo n “title” 的时候生成的东西就和原来 octopress 时一样了。<br>保存一下当前的配置和文章。</p>
+<pre><code>git add --all .
+git commit -m &quot;somthing&quot;
+git push
+</code></pre><p>enjoy.</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-19T07:08:23.000Z"><a href="/2015/02/19/bcm4350-driver/">2015-02-19</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/02/19/bcm4350-driver/">Archlinux 下 BCM4352 驱动加载</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>gnome 装完后发现没 wifi ，<code>ip link</code>看了发现只有有线和本地 lo 回环。<br>于是 lspci 一下发现网卡在，</p>
+<pre><code>lspci -vnn | grep Bro
+
+03:00.0 Network controller [0280]: Broadcom Corporation BCM4352 802.11ac Wireless Network Adapter [14e4:43b1] (rev 03)
+</code></pre><p>我想不会要找驱动吧，google 了一下，搜到了这个<br><a href="https://wiki.archlinux.org/index.php/broadcom_wireless#broadcom-wl" target="_blank" rel="external">broadcom-wl</a><br>博通看起来有几个不同的驱动啊。<br>照着里面的试了下。  </p>
+<p>先卸载内核模块</p>
+<pre><code>rmmod b43
+rmmod ssb
+</code></pre><p>我机子上这俩都没加载<br>直接加载另外的模块：</p>
+<pre><code>modprobe wl
+</code></pre><p>wl会自动加载以下的俩模块，没加载就要手动加载。</p>
+<pre><code>modprobe lib80211
+modprobe lib80211_crypt_tkip
+</code></pre><p><code>ip link</code> 看看，发现 wifi 起来了。</p>
+<pre><code>2: wlp3s0: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state DORMANT mode DORMANT group default qlen 1000
+link/ether 00:6b:9e:06:1d:8c brd ff:ff:ff:ff:ff:ff
+</code></pre><p>运气不错~  </p>
+<p>然后就是屏蔽模块和自动加载 wl 了。<br>/etc/modprobe.d/ 下面放个 nob43.conf ，里面写上</p>
+<pre><code>blacklist b43
+blacklist ssb
+</code></pre><p>然后在/etc/modules-load.d/ 下面放个 wl.conf ，里面写上：</p>
+<pre><code>wl
+lib80211
+lib80211_crypt_tkip
+</code></pre><p>这就ok了。  </p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-17T06:40:06.000Z"><a href="/2015/02/17/archlinux-setup/">2015-02-17</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/02/17/archlinux-setup/">archlinux-2015.02.01 配置</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>前面已经装好了 archlinux，一个很基本的系统，<br>接下来装个图形界面，和一些基本的软件什么的。  </p>
+<p>窗口管理器选的 gdm ，然后图形界面选的 gnome3  </p>
+<h2 id="安装-zsh"><a href="#安装-zsh" class="headerlink" title="安装 zsh"></a>安装 zsh</h2><p>至于为嘛，用了就离不开了~<br>虽然有些小蛋疼的地方。。</p>
+<pre><code>pacman -S zsh
+</code></pre><h2 id="新建一个用户"><a href="#新建一个用户" class="headerlink" title="新建一个用户"></a>新建一个用户</h2><p>参考的 wiki ，直接照打的<br>现在想想如果没添加这些权限，现在可能都在解决问题了，这文章肯定要过一两天才看得到了。</p>
+<pre><code>useradd -m -g users -G audio,video,floppy,network,rfkill,scanner,storage,optical,power,wheel,uucp -s /usr/bin/zsh 你的用户名
+</code></pre><p>设置密码</p>
+<pre><code>passwd 你的用户名
+</code></pre><h2 id="sudo-的设置"><a href="#sudo-的设置" class="headerlink" title="sudo 的设置"></a>sudo 的设置</h2><p>默认似乎没法用，<br>需要 visudo 编辑一下 sudo 的配置。</p>
+<pre><code>visudo
+</code></pre><p>进去后去掉wheel那一行前面的注释符号 # 即可。</p>
+<pre><code>%wheel ALL=(ALL) ALL
+</code></pre><h2 id="安装-xorg-和-gdm-和-gnome-和-nvidia-驱动"><a href="#安装-xorg-和-gdm-和-gnome-和-nvidia-驱动" class="headerlink" title="安装 xorg 和 gdm 和 gnome 和 nvidia 驱动"></a>安装 xorg 和 gdm 和 gnome 和 nvidia 驱动</h2><p>输入法选的 fcitx<br>顺便安装了一个 xterm 测试 xorg 用<br>alsa-utils 安装是因为 gnome 要这个貌似。</p>
+<pre><code>pacman -S xorg-server xorg-xinit wqy-zenhei wqy-microhei wqy-microhei-lite fcitx xterm alsa-utils unrar unzip
+pacman -S fcitx-configtool
+</code></pre><p>xorg 装完可以启动下试试，看看能不能正常使用，<br>退出的话，用鼠标叉掉窗口，就退出了。</p>
+<pre><code>startx
+</code></pre><p>我显卡是 nvidia 安装驱动就用 nvidia 驱动吧，之前 ubuntu 下面用着挺好的。</p>
+<pre><code>pacman -S nvidia
+</code></pre><p>会提示 libgl 冲突，选择 nvidia 的就行，mesa-libgl 是开源版本的。<br>安装 gnome3 ，archlinux 默认就是 3 了，直接安装就是 gnome3 了。  </p>
+<p>安装这个包默认 gdm 貌似也装了，就不用再安装一遍了。</p>
+<pre><code>pacman -S gnome
+</code></pre><h2 id="安装-vim"><a href="#安装-vim" class="headerlink" title="安装 vim"></a>安装 vim</h2><p>注意要安装 gvim ，这个相比 vim 多了 clipboard 等编译参数，<br>有的指令比如 “+y 这种与系统剪切板交互的指令只有 gvim 才有。<br>启动不过还是一样的是 <code>vim</code></p>
+<pre><code>pacman -S gvim
+</code></pre><h2 id="配置-vi-指向-vim"><a href="#配置-vi-指向-vim" class="headerlink" title="配置 vi 指向 vim"></a>配置 vi 指向 vim</h2><p>archlinux 自带一个 vi ，但真的非常不好用，<br><del>虽然在 <code>.zshrc</code> 里加入 <code>alias vi=vim</code> 之后，当前用户可以了，</del><br><del>但是 sudo vi 之后，又变成了那个阉割版的 vi ，</del><br><del>简单粗暴的，直接链接下 vim 到 vi 了，</del></p>
+<p><del>ln -s /usr/bin/vim /usr/local/bin/vi</del></p>
+<p>卸掉：</p>
+<pre><code>pacman -R vi
+</code></pre><p>加入以下 alias</p>
+<pre><code>alias vi=vim
+alias sudo=&apos;sudo &apos;
+alias &apos;sudo vi&apos;=&apos;sudo vim&apos;
+</code></pre><h2 id="安装-fcitx-的一些组件"><a href="#安装-fcitx-的一些组件" class="headerlink" title="安装 fcitx 的一些组件"></a>安装 fcitx 的一些组件</h2><p>拼音输入法我选的是 rime ，在 osx 下用了很久了，就这个了。</p>
+<pre><code>pacman -S fcitx-gtk2 fcitx-gtk3 fcitx-rime fcitx-configtool fcitx-qt4 fcitx-qt5
+</code></pre><h2 id="安装-gnome-的网络组件"><a href="#安装-gnome-的网络组件" class="headerlink" title="安装 gnome 的网络组件"></a>安装 gnome 的网络组件</h2><p>这个装了之后，在 gnome 右上角才能设置。<br>wireless_tools 是 wifi 必须的。</p>
+<pre><code>pacman -S gnome-nettool wireless_tools
+</code></pre><p>装完要开启 networkmanager 服务<br>顺便启动一下</p>
+<pre><code>systemctl enable NetworkManager
+systemctl start NetworkManager
+</code></pre><h2 id="装个-firefox-先用用，后面再安装-chrome"><a href="#装个-firefox-先用用，后面再安装-chrome" class="headerlink" title="装个 firefox 先用用，后面再安装 chrome"></a>装个 firefox 先用用，后面再安装 chrome</h2><p>我是 chrome 控~<br>当然还有 flash plugin</p>
+<pre><code>pacman -S firefox flashplugin
+</code></pre><h2 id="启动-gdm"><a href="#启动-gdm" class="headerlink" title="启动 gdm"></a>启动 gdm</h2><p>感觉可以启动 gdm 试试了</p>
+<pre><code>systemctl enable gdm
+systemctl start gdm
+</code></pre><p><em>啊，登录界面来了~</em><br>n卡还是方便，没碰到啥问题。</p>
+<p><em>可以用新建的账户登录了</em><br>剩下的配置就用 gnome-terminal 来弄了~</p>
+<p>当然登录之后就不是 root 账户了，搞个啥都要 sudo<br>我恨 sudo</p>
+<h2 id="触摸板驱动"><a href="#触摸板驱动" class="headerlink" title="触摸板驱动"></a>触摸板驱动</h2><p>大部分都是 synaptics 的触摸板，装了就能用触摸板了。</p>
+<pre><code>sudo pacman -S xf86-input-synaptics
+</code></pre><h2 id="配置-fcitx"><a href="#配置-fcitx" class="headerlink" title="配置 fcitx"></a>配置 fcitx</h2><pre><code>vi ~/.xprofile
+</code></pre><p>加入三行：</p>
+<pre><code>export XMODIFIERS=@im=fcitx
+export QT_IM_MODULE=fcitx
+export GTK_IM_MODULE=fcitx
+</code></pre><p>要注销下才能生效。</p>
+<p>fcitx 自带一个 <code>fcitx-diagnose</code><br>configure ui 和 xim 报的错误可以不管，其他都修正了，一般 fcitx 就 ok 了。</p>
+<h2 id="配置-oh-my-zsh"><a href="#配置-oh-my-zsh" class="headerlink" title="配置 oh-my-zsh"></a>配置 oh-my-zsh</h2><p>真是个好东西</p>
+<pre><code>curl -L http://install.ohmyz.sh | sh
+</code></pre><p>搞定</p>
+<h2 id="设置-gnome3"><a href="#设置-gnome3" class="headerlink" title="设置 gnome3"></a>设置 gnome3</h2><p>装个 GNOME tweak tool 先  </p>
+<pre><code>sudo pacman -S gnome-tweak-tool
+</code></pre><p>进入设置里，Tweak Tools<br>Appearance 里，打开 Global Dark Theme，黑色才高大上嘛。<br>Desktop 里，打开 Icons on Desktop，桌面才能放图标。</p>
+<h2 id="一些小工具"><a href="#一些小工具" class="headerlink" title="一些小工具"></a>一些小工具</h2><p>iftop 查看流量的<br>aria2 命令行下载工具<br>xorg-xinput xinput 工具，编辑鼠标加速用<br>gedit gnome3 的文本编辑器  </p>
+<p>dosfstools 有了这个才有 mkfs.fat<br>ntfsprogs 有了这个才有 mkfs.ntfs  </p>
+<pre><code>sudo pacman -S iftop aria2 xorg-xinput gedit
+sudo pacman -S dosfstools
+sudo pacman -S ntfsprogs
+</code></pre><p>差不多就这些了。  </p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-16T12:43:10.000Z"><a href="/2015/02/16/archlinux-install/">2015-02-16</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/02/16/archlinux-install/">Archlinux-2015.02.01 安装</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="准备安装"><a href="#准备安装" class="headerlink" title="准备安装"></a>准备安装</h2><p>之前有装有 ubuntu ，分给 / 有 50g ，然后因为我有 16G 内存，<br>swap 就只分了 512M ，现在发现就是可能没法休眠，因为 swap 太小了放不下内存的数据。。<br>分区状态：</p>
+<pre><code>sda           8:0    0 238.5G  0 disk  
+├─sda1        8:1    0   384M  0 part  /boot/efi
+├─sda2        8:2    0   128M  0 part  
+├─sda3        8:3    0    99G  0 part  
+├─sda4        8:4    0  88.5G  0 part  
+├─sda5        8:5    0  49.5G  0 part  /
+└─sda6        8:6    0   512M  0 part  [SWAP]
+sdb           8:16   0 931.5G  0 disk  
+└─md126       9:126  0 931.5G  0 raid1 
+  └─md126p1 259:0    0 931.5G  0 md    /run/media/kokutou/HitachiRaid1
+sdc           8:32   0 119.2G  0 disk  
+├─sdc1        8:33   0   382M  0 part  
+└─sdc2        8:34   0 118.6G  0 part  
+sdd           8:48   0 931.5G  0 disk  
+└─md126       9:126  0 931.5G  0 raid1 
+  └─md126p1 259:0    0 931.5G  0 md    /run/media/kokutou/HitachiRaid1
+</code></pre><p>sda 是个 256g 的固态，放了win7，<br>然后分区表是 gpt ，<br>sda1 是 efi 分区，<br>sda2 是微软的保留分区，<br>sda3 是 win7 系统盘，<br>sda4 是win7 下的 D 盘。<br>sda5 装了 ubuntu ，安装的时候就不用分区了，直接格式化掉就行了。  </p>
+<h2 id="写入安装镜像"><a href="#写入安装镜像" class="headerlink" title="写入安装镜像"></a>写入安装镜像</h2><p>找了个 4g 的 u盘 ，直接用 dd 把镜像给写进去了。<br>用的是 windows 下的 cygwin 里面的 dd ，没用那个 安装助手，安装助手 在 uefi 下面没一个能启动的。。。  </p>
+<p>cygwin 下用 dd 不能用卷标，得 <code>cat/proc/partitions</code> 来得到 类似 /dev/sdx 的磁盘路径才行。<br><em>不要搞错，否则数据就没了 ^_^</em><br>写入命令是：  </p>
+<pre><code>dd if=image.iso of=/dev/sdx（你的u盘） bs=4M
+</code></pre><p>然后重启选择u盘启动，就进到 shell 可以开始安装了。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>基本就是参考 wiki 上的来的。  </p>
+<p>键盘布局我没设置。<br>终端字体我也没设置。  </p>
+<p>locale 设置了下，注释掉了 en_US.UTF-8 和 zh_CN.<em> 和 zh_HK.</em><br>如下：</p>
+<pre><code>en_US.UTF-8 UTF-8
+zh_CN.UTF-8 UTF-8  
+zh_CN.GB18030 GB18030  
+zh_CN.GBK GBK 
+zh_CN GB2312  
+zh_TW.UTF-8 UTF-8  
+zh_TW.EUC-TW EUC-TW  
+zh_TW BIG5  
+</code></pre><p>然后 <code>locale-gen</code> 就行了。</p>
+<h2 id="联网"><a href="#联网" class="headerlink" title="联网"></a>联网</h2><p>我有线连的路由器，ping 一下 www.baidu.com ，没通就 <code>dhcpcd</code>一下来自动获取 ip ，稍等一会，再 ping 就通了。</p>
+<h2 id="格式化分区"><a href="#格式化分区" class="headerlink" title="格式化分区"></a>格式化分区</h2><p>lsblk 看一下，然后格式化之前的 ubuntu 分区，再挂载，最后建立挂载表。</p>
+<pre><code>sda      8:0    0 238.5G  0 disk 
+├─sda1   8:1    0   384M  0 part /boot/efi
+├─sda2   8:2    0   128M  0 part 
+├─sda3   8:3    0    99G  0 part 
+├─sda4   8:4    0  88.5G  0 part 
+├─sda5   8:5    0  49.5G  0 part /
+└─sda6   8:6    0   512M  0 part [SWAP]
+</code></pre><p>/dev/sda1 是 efi , /dev/sda5 是根分区，/dev/sda6 是 swap 分区。</p>
+<pre><code>mkfs.ext4 /dev/sda5
+mkswap /dev/sda6
+swapon /dev/sda6
+</code></pre><h2 id="挂载分区"><a href="#挂载分区" class="headerlink" title="挂载分区"></a>挂载分区</h2><p>我的home和boot就都放在根分区下了。<br>顺便把efi挂上去。</p>
+<pre><code>mount /dev/sda5 /mnt
+mkdir /mnt/home
+mkdir /mnt/boot
+mkdir /mnt/boot/efi
+mount /dev/sda1 /mnt/boot/efi
+</code></pre><h2 id="编辑源列表"><a href="#编辑源列表" class="headerlink" title="编辑源列表"></a>编辑源列表</h2><p>用 vi 把 /etc/pacman.d/mirrorlist 里面的 163 的源放到第一个就行了。</p>
+<h2 id="安装基本系统"><a href="#安装基本系统" class="headerlink" title="安装基本系统"></a>安装基本系统</h2><pre><code>pacstrap -i /mnt base base-devel
+</code></pre><h2 id="生成-fstab"><a href="#生成-fstab" class="headerlink" title="生成 fstab"></a>生成 fstab</h2><pre><code>genfstab -U -p /mnt &gt;&gt; /mnt/etc/fstab
+</code></pre><p>完了检查下 fstab ，看看是不是对的。</p>
+<h2 id="Chroot-到新系统，并配置系统"><a href="#Chroot-到新系统，并配置系统" class="headerlink" title="Chroot 到新系统，并配置系统"></a>Chroot 到新系统，并配置系统</h2><pre><code>arch-chroot /mnt /bin/bash
+</code></pre><h2 id="locale"><a href="#locale" class="headerlink" title="locale"></a>locale</h2><p>编辑下 /etc/locale.gen 注释掉几个 utf-8 的项目。</p>
+<pre><code>en_US.UTF-8 UTF-8
+zh_CN.UTF-8 UTF-8
+zh_TW.UTF-8 UTF-8
+</code></pre><p>然后 <code>locale-gen</code><br>设置 locale：</p>
+<pre><code>echo LANG=en_US.UTF-8 &gt; /etc/locale.conf
+</code></pre><h2 id="字体和键盘映射跳过，除非是非英语"><a href="#字体和键盘映射跳过，除非是非英语" class="headerlink" title="字体和键盘映射跳过，除非是非英语"></a>字体和键盘映射跳过，除非是非英语</h2><h2 id="时区"><a href="#时区" class="headerlink" title="时区"></a>时区</h2><p>这个 archlinux 是建议用 utc 时间的，不过 windows 是用的本地时间，<br>然后 osx 默认也是用的 utc 时间，之前我 osx 和 windows 是时间差是用的 osx 下面的一个开机修改时间的小脚本弄的，现在想了想就还是把 windows 修改成 utc 时间，再删掉 osx 那个小脚本好了。  </p>
+<ul>
+<li>修改 windows 为 utc 时间。*<br>打开 regedit ，在<code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation</code>项下面，新建一个名为 <code>RealTimeIsUniversal</code> 的 dword32 值 ，并赋值为 1 ，然后重启，再联网同步一下时间。<br>当然不用现在就做，装完或者装之前再弄都行。</li>
+</ul>
+<p>回到 linux<br>用 utc+8 的时区，比如上海。</p>
+<pre><code>ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+</code></pre><p>硬件时间，默认就是 utc ，可不用设置。<br>就算时间错了，设置好 windows utc 之后，windows 下同步一下，再进 linux 时间就对了。</p>
+<pre><code>hwclock --systohc --utc
+</code></pre><h2 id="hostname-主机名"><a href="#hostname-主机名" class="headerlink" title="hostname 主机名"></a>hostname 主机名</h2><pre><code>echo hostname &gt; /etc/hostname
+</code></pre><p>并且在 /etc/hosts 添加一样的主机名（这个好像不用做，不过我还是做了。</p>
+<pre><code>#&lt;ip-address&gt;   &lt;hostname.domain.org&gt;   &lt;hostname&gt;
+127.0.0.1       localhost.localdomain   localhost   *myhostname*
+::1             localhost.localdomain   localhost   *myhostname*
+</code></pre><h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><p>这个倒不用设置，要网的时候临时 dhcpcd 好了。</p>
+<h2 id="创建初始-ramdisk"><a href="#创建初始-ramdisk" class="headerlink" title="创建初始 ramdisk"></a>创建初始 ramdisk</h2><p>似乎这个自动做了，不用手动来一遍。</p>
+<pre><code>mkinitcpio -p linux
+</code></pre><h2 id="设置-root-密码"><a href="#设置-root-密码" class="headerlink" title="设置 root 密码"></a>设置 root 密码</h2><pre><code>passwd
+</code></pre><p>输入密码是没显示的，不是你键盘坏了。</p>
+<h2 id="安装-grub"><a href="#安装-grub" class="headerlink" title="安装 grub"></a>安装 grub</h2><p>由于是 uefi 启动，参数略有不一样。<br>/boot/efi 是之前挂载好了的efi分区 。</p>
+<pre><code>pacman -S grub efibootmgr
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch_grub --recheck
+</code></pre><p>然后生成 grub 配置文件就可以重启了。</p>
+<pre><code>grub-mkconfig -o /boot/grub/grub.cfg
+</code></pre><h2 id="卸载分区，重启系统"><a href="#卸载分区，重启系统" class="headerlink" title="卸载分区，重启系统"></a>卸载分区，重启系统</h2><p>重启的时候分区会自动卸载，直接重启就行了。。。</p>
+<pre><code>exit
+reboot
+</code></pre><h2 id="欢迎来到-archlinux"><a href="#欢迎来到-archlinux" class="headerlink" title="欢迎来到 archlinux"></a>欢迎来到 archlinux</h2><p>刚装完，啥都没有，不过这种很干净的感觉挺好的。。。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-16T03:21:07.000Z"><a href="/2015/02/16/adb-cant-find-devices/">2015-02-16</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/02/16/adb-cant-find-devices/">archlinux下，普通用户adb无法连接设备</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>archlinux 下面，装的 google 官网的 Android Studio<br>想用真机调试，点了软件里的运行之后，发现设备显示的确是问号：</p>
+<pre><code>????????????    no permissions
+</code></pre><p>于是估计应该是没权限，进入到 Sdk 的目录下面<br><code>sudo adb devices</code> 发现可以正常连接设备。</p>
+<p>搜了下 wiki ，普通用户使用看起来要写 udev 脚本，<br>于是上 yaourt 搜了下，发现了个 android-udev 的包，直接安装下试试：</p>
+<pre><code>yaourt -S android-udev
+</code></pre><p>试试普通用户运行<code>adb devices</code>，啊，正常了。  </p>
+<p>再试试 Android Studio ，普通用户能调试了。  </p>
+<p>找了找，发现 android-udev 这个包是安装了 /lib/udev/rules.d/51-android.rules 这个 udev 规则。感兴趣的可以看看。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-16T00:21:51.000Z"><a href="/2015/02/16/octopress-add-category/">2015-02-16</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/02/16/octopress-add-category/">octopress 添加分类列表</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>发现octopress居然没分类列表，于是google下，添加了一个：<br><a href="http://codemacro.com/2012/07/18/add-category-list-to-octopress/" target="_blank" rel="external">链接</a><br>步骤为：</p>
+<p>增加category_list插件<br>保存以下代码到plugins/category_list_tag.rb：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">module</span> <span class="title">Jekyll</span></span></div><div class="line">  <span class="class"><span class="keyword">class</span> <span class="title">CategoryListTag</span> &lt; Liquid::Tag</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">render</span><span class="params">(context)</span></span></div><div class="line">      html = <span class="string">""</span></div><div class="line">      categories = context.registers[<span class="symbol">:site</span>].categories.keys</div><div class="line">      categories.sort.each <span class="keyword">do</span> <span class="params">|category|</span></div><div class="line">        posts_in_category = context.registers[<span class="symbol">:site</span>].categories[category].size</div><div class="line">        category_dir = context.registers[<span class="symbol">:site</span>].config[<span class="string">'category_dir'</span>]</div><div class="line">        category_url = File.join(category_dir, category.gsub(<span class="regexp">/_|\P&#123;Word&#125;/</span>, <span class="string">'-'</span>).gsub(<span class="regexp">/-&#123;2,&#125;/</span>, <span class="string">'-'</span>).downcase)</div><div class="line">        html &lt;&lt; <span class="string">"&lt;li class='category'&gt;&lt;a href='/<span class="subst">#&#123;category_url&#125;</span>/'&gt;<span class="subst">#&#123;category&#125;</span> (<span class="subst">#&#123;posts_in_category&#125;</span>)&lt;/a&gt;&lt;/li&gt;\n"</span></div><div class="line">      <span class="keyword">end</span></div><div class="line">      html</div><div class="line">    <span class="keyword">end</span></div><div class="line">  <span class="keyword">end</span></div><div class="line"><span class="keyword">end</span></div><div class="line"></div><div class="line">Liquid::Template.register_tag(<span class="string">'category_list'</span>, Jekyll::CategoryListTag)</div></pre></td></tr></table></figure>
+<p>以上生成list，以下让它显示出来<br>增加aside<br>复制以下代码到source/_includes/asides/category_list.html。</p>
+
+    <section>
+      <h1>Categories</h1>
+        <ul id="categories">
+          {% category_list %}
+      </ul>
+    </section>
+
+<p>修改 _config.yml 文件中的 default_asides 项：<br>加入 asides/category_list.html 即可</p>
+<pre><code>default_asides: [asides/category_list.html, asides/recent_posts.html ... ... ]
+</code></pre>
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-15T23:32:20.000Z"><a href="/2015/02/16/aapt-cant-run/">2015-02-16</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/02/16/aapt-cant-run/">andorid studio 在 archlinux 上调试程序时报错</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>用 google 官网的 android studio 安装完后，直接新建个空工程和avd，<br>点运行会报错如下：</p>
+<pre><code>Error: Cannot run program &quot;/home/user_name/Android/Sdk/build-tools/21.1.2/aapt&quot;: error=2, No such file or directory
+</code></pre><p>到对应目录下看，发现 aapt 这个程序是存在的。<br>但是 <code>./aapt</code> 却不能运行。<br>之前尝试<code>yaourt -S android-studio</code>的时候会安装一大堆  lib32  的库，<br>于是怀疑是没 lib32 的库，<br>当然你直接<code>yaourt -S android-studio</code>等它解决完依赖后就停下来也行。<br><strong>就可以不用看下面的了</strong>  </p>
+<p>但我不想装那么多库，就只能排查了。  </p>
+<p>搜到了<code>ldd</code>可以看程序，但发现这东西和我想的不太一样。<br>然后找到了<code>readelf</code>，运行：</p>
+<pre><code>readelf -l ./aapt
+</code></pre><p>得到一大堆，看中间一行：</p>
+<pre><code>...
+Requesting program interpreter: /lib/ld-linux.so.2
+...
+</code></pre><p>应该就是这个库了，google 了一下发现是 lib32-glibc<br>直接<code>pacman -S lib32-glibc</code>装上，<br>接着<code>./aapt</code>会发现可以运行了，这是会直接提示说缺xxx.so.x<br>直接照名称装上 lib32-zlib 和 lib32stdc++5 就ok了。  </p>
+<p>这时候再运行<code>./aapt</code>就正常了。<br>再打开 Android Studio 调试试试，能正常运行不报错了。  </p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-15T14:07:45.000Z"><a href="/2015/02/15/proxy-git/">2015-02-15</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/02/15/proxy-git/">使用goagent代理git</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>环境 archlinux + zsh  </p>
+<p>git直连的时候也不是不能正常工作，就是特慢，实在不能忍。。。<br>以下为代理方法,直接加入到.zshrc：</p>
+<pre><code># 设定http和https代理，指向GoAgent
+# 这个设置会同时影响到 curl wget rvm gem bundle
+export http_proxy=&apos;http://127.0.0.1:8087&apos;
+export https_proxy=$http_proxy
+# 让git clone时忽略SSL错误
+export GIT_SSL_NO_VERIFY=true
+</code></pre><p>当然，不用上面的全局方法，只让git通过代理也是可以的。</p>
+<pre><code>git config --global http.proxy http://127.0.0.1:8087
+</code></pre><p>以下运行一次~</p>
+<pre><code># git的全局设定，关闭ssl验证
+git config --global http.sslVerify false
+</code></pre><p>用全局代理的话，完了之后 yaourt -S xxx 会出现 curl 证书错误<br>修正方法：</p>
+<pre><code># 让curl永久忽略SSL错误
+echo insecure &gt;&gt; ~/.curlrc
+</code></pre><p>我这样做却无效。。。<br>google之后发现还是要手动装证书= =</p>
+<pre><code>ca-certificates update
+https://www.archlinux.org/news/ca-certificates-update/
+</code></pre><p>archlinux 2014-12-11之后ca的安装方法改变了<br><a href="https://www.archlinux.org/news/ca-certificates-update/" target="_blank" rel="external">链接</a></p>
+<p>以下新的安装方法：</p>
+<pre><code>复制 goagent/local/CA.crt /etc/ca-certificates/trust-source/anchors/
+运行 trust extract-compat
+</code></pre><p>然后 curl 就ok了~  </p>
+<p>啊，rake gen_deploy 飞速~</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+
+<nav id="pagination">
+  
+  
+    <a href="/page/2/" class="alignright next">Nächste Seite</a>
+  
+  <div class="clearfix"></div>
+</nav></div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:kokutoukiritsugu.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Kategorien</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/android/">android</a><small>2</small></li>
+  
+    <li><a href="/categories/archlinux/">archlinux</a><small>3</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>3</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>2</small></li>
+  
+    <li><a href="/categories/markdown/">markdown</a><small>1</small></li>
+  
+    <li><a href="/categories/octopress/">octopress</a><small>3</small></li>
+  
+    <li><a href="/categories/ubuntu/">ubuntu</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 黑桐切嗣
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'kokutoukiritsugu';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>git push不用输入帐号密码 | kokutou kiritsugu&#39;s blog</title>
+  <meta name="author" content="黑桐切嗣">
+  
+  <meta name="description" content="首先看看有没有sshkey：
+cd ~/.ssh
+有的话，就要备份或者删除。添加一个key：
+ssh-keygen -t rsa -C &amp;quot;邮箱@xx.com&amp;quot;
+提示设置密码的时候直接回车，不然push的时候还是要输入密码。成功后复制.ssh/id_rsa.pub到github的账">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="git push不用输入帐号密码"/>
+  <meta property="og:site_name" content="kokutou kiritsugu&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="kokutou kiritsugu&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">kokutou kiritsugu&#39;s blog</a></h1>
+  <h2><a href="/">sometime, something, some codes.(kokutoukiritsugu@gmail.com)</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2014-01-10T07:42:30.000Z"><a href="/2014/01/10/githubbu-yong-shu-ru-zhang-hao-mi-ma/">2014-01-10</a></time>
+      
+      
+  
+    <h1 class="title">git push不用输入帐号密码</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>首先看看有没有sshkey：</p>
+<pre><code>cd ~/.ssh
+</code></pre><p>有的话，就要备份或者删除。<br>添加一个key：</p>
+<pre><code>ssh-keygen -t rsa -C &quot;邮箱@xx.com&quot;
+</code></pre><p>提示设置密码的时候直接回车，不然push的时候还是要输入密码。<br>成功后复制.ssh/id_rsa.pub到github的账户设置里的sshkey里面就可以了。</p>
+<p><strong> 2015-02-15 更新 </strong>  </p>
+<p>用了goagent代理之后，用ssh感觉很慢。。。<br>https的有办法临时储存密码。<br>方法如下：</p>
+<pre><code>git config --global credential.helper &apos;cache --timeout=3600&apos;
+# Set the cache to timeout after 1 hour (setting is in seconds)
+</code></pre><p>–timeout=3600 不带这个参数的时候默认为15分钟。<br>git官方说明：<a href="https://help.github.com/articles/caching-your-github-password-in-git/" target="_blank" rel="external">点我</a>  </p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/git/">git</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://kokutoukiritsugu.github.io/2014/01/10/githubbu-yong-shu-ru-zhang-hao-mi-ma/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:kokutoukiritsugu.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Kategorien</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/android/">android</a><small>2</small></li>
+  
+    <li><a href="/categories/archlinux/">archlinux</a><small>3</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>3</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>2</small></li>
+  
+    <li><a href="/categories/markdown/">markdown</a><small>1</small></li>
+  
+    <li><a href="/categories/octopress/">octopress</a><small>3</small></li>
+  
+    <li><a href="/categories/ubuntu/">ubuntu</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 黑桐切嗣
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'kokutoukiritsugu';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

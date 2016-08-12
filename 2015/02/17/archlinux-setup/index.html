@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>archlinux-2015.02.01 配置 | kokutou kiritsugu&#39;s blog</title>
+  <meta name="author" content="黑桐切嗣">
+  
+  <meta name="description" content="前面已经装好了 archlinux，一个很基本的系统，接下来装个图形界面，和一些基本的软件什么的。  
+窗口管理器选的 gdm ，然后图形界面选的 gnome3  
+安装 zsh至于为嘛，用了就离不开了~虽然有些小蛋疼的地方。。
+pacman -S zsh
+新建一个用户参考的 wiki ，直接照打的">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="archlinux-2015.02.01 配置"/>
+  <meta property="og:site_name" content="kokutou kiritsugu&#39;s blog"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="kokutou kiritsugu&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">kokutou kiritsugu&#39;s blog</a></h1>
+  <h2><a href="/">sometime, something, some codes.(kokutoukiritsugu@gmail.com)</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-02-17T06:40:06.000Z"><a href="/2015/02/17/archlinux-setup/">2015-02-17</a></time>
+      
+      
+  
+    <h1 class="title">archlinux-2015.02.01 配置</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>前面已经装好了 archlinux，一个很基本的系统，<br>接下来装个图形界面，和一些基本的软件什么的。  </p>
+<p>窗口管理器选的 gdm ，然后图形界面选的 gnome3  </p>
+<h2 id="安装-zsh"><a href="#安装-zsh" class="headerlink" title="安装 zsh"></a>安装 zsh</h2><p>至于为嘛，用了就离不开了~<br>虽然有些小蛋疼的地方。。</p>
+<pre><code>pacman -S zsh
+</code></pre><h2 id="新建一个用户"><a href="#新建一个用户" class="headerlink" title="新建一个用户"></a>新建一个用户</h2><p>参考的 wiki ，直接照打的<br>现在想想如果没添加这些权限，现在可能都在解决问题了，这文章肯定要过一两天才看得到了。</p>
+<pre><code>useradd -m -g users -G audio,video,floppy,network,rfkill,scanner,storage,optical,power,wheel,uucp -s /usr/bin/zsh 你的用户名
+</code></pre><p>设置密码</p>
+<pre><code>passwd 你的用户名
+</code></pre><h2 id="sudo-的设置"><a href="#sudo-的设置" class="headerlink" title="sudo 的设置"></a>sudo 的设置</h2><p>默认似乎没法用，<br>需要 visudo 编辑一下 sudo 的配置。</p>
+<pre><code>visudo
+</code></pre><p>进去后去掉wheel那一行前面的注释符号 # 即可。</p>
+<pre><code>%wheel ALL=(ALL) ALL
+</code></pre><h2 id="安装-xorg-和-gdm-和-gnome-和-nvidia-驱动"><a href="#安装-xorg-和-gdm-和-gnome-和-nvidia-驱动" class="headerlink" title="安装 xorg 和 gdm 和 gnome 和 nvidia 驱动"></a>安装 xorg 和 gdm 和 gnome 和 nvidia 驱动</h2><p>输入法选的 fcitx<br>顺便安装了一个 xterm 测试 xorg 用<br>alsa-utils 安装是因为 gnome 要这个貌似。</p>
+<pre><code>pacman -S xorg-server xorg-xinit wqy-zenhei wqy-microhei wqy-microhei-lite fcitx xterm alsa-utils unrar unzip
+pacman -S fcitx-configtool
+</code></pre><p>xorg 装完可以启动下试试，看看能不能正常使用，<br>退出的话，用鼠标叉掉窗口，就退出了。</p>
+<pre><code>startx
+</code></pre><p>我显卡是 nvidia 安装驱动就用 nvidia 驱动吧，之前 ubuntu 下面用着挺好的。</p>
+<pre><code>pacman -S nvidia
+</code></pre><p>会提示 libgl 冲突，选择 nvidia 的就行，mesa-libgl 是开源版本的。<br>安装 gnome3 ，archlinux 默认就是 3 了，直接安装就是 gnome3 了。  </p>
+<p>安装这个包默认 gdm 貌似也装了，就不用再安装一遍了。</p>
+<pre><code>pacman -S gnome
+</code></pre><h2 id="安装-vim"><a href="#安装-vim" class="headerlink" title="安装 vim"></a>安装 vim</h2><p>注意要安装 gvim ，这个相比 vim 多了 clipboard 等编译参数，<br>有的指令比如 “+y 这种与系统剪切板交互的指令只有 gvim 才有。<br>启动不过还是一样的是 <code>vim</code></p>
+<pre><code>pacman -S gvim
+</code></pre><h2 id="配置-vi-指向-vim"><a href="#配置-vi-指向-vim" class="headerlink" title="配置 vi 指向 vim"></a>配置 vi 指向 vim</h2><p>archlinux 自带一个 vi ，但真的非常不好用，<br><del>虽然在 <code>.zshrc</code> 里加入 <code>alias vi=vim</code> 之后，当前用户可以了，</del><br><del>但是 sudo vi 之后，又变成了那个阉割版的 vi ，</del><br><del>简单粗暴的，直接链接下 vim 到 vi 了，</del></p>
+<p><del>ln -s /usr/bin/vim /usr/local/bin/vi</del></p>
+<p>卸掉：</p>
+<pre><code>pacman -R vi
+</code></pre><p>加入以下 alias</p>
+<pre><code>alias vi=vim
+alias sudo=&apos;sudo &apos;
+alias &apos;sudo vi&apos;=&apos;sudo vim&apos;
+</code></pre><h2 id="安装-fcitx-的一些组件"><a href="#安装-fcitx-的一些组件" class="headerlink" title="安装 fcitx 的一些组件"></a>安装 fcitx 的一些组件</h2><p>拼音输入法我选的是 rime ，在 osx 下用了很久了，就这个了。</p>
+<pre><code>pacman -S fcitx-gtk2 fcitx-gtk3 fcitx-rime fcitx-configtool fcitx-qt4 fcitx-qt5
+</code></pre><h2 id="安装-gnome-的网络组件"><a href="#安装-gnome-的网络组件" class="headerlink" title="安装 gnome 的网络组件"></a>安装 gnome 的网络组件</h2><p>这个装了之后，在 gnome 右上角才能设置。<br>wireless_tools 是 wifi 必须的。</p>
+<pre><code>pacman -S gnome-nettool wireless_tools
+</code></pre><p>装完要开启 networkmanager 服务<br>顺便启动一下</p>
+<pre><code>systemctl enable NetworkManager
+systemctl start NetworkManager
+</code></pre><h2 id="装个-firefox-先用用，后面再安装-chrome"><a href="#装个-firefox-先用用，后面再安装-chrome" class="headerlink" title="装个 firefox 先用用，后面再安装 chrome"></a>装个 firefox 先用用，后面再安装 chrome</h2><p>我是 chrome 控~<br>当然还有 flash plugin</p>
+<pre><code>pacman -S firefox flashplugin
+</code></pre><h2 id="启动-gdm"><a href="#启动-gdm" class="headerlink" title="启动 gdm"></a>启动 gdm</h2><p>感觉可以启动 gdm 试试了</p>
+<pre><code>systemctl enable gdm
+systemctl start gdm
+</code></pre><p><em>啊，登录界面来了~</em><br>n卡还是方便，没碰到啥问题。</p>
+<p><em>可以用新建的账户登录了</em><br>剩下的配置就用 gnome-terminal 来弄了~</p>
+<p>当然登录之后就不是 root 账户了，搞个啥都要 sudo<br>我恨 sudo</p>
+<h2 id="触摸板驱动"><a href="#触摸板驱动" class="headerlink" title="触摸板驱动"></a>触摸板驱动</h2><p>大部分都是 synaptics 的触摸板，装了就能用触摸板了。</p>
+<pre><code>sudo pacman -S xf86-input-synaptics
+</code></pre><h2 id="配置-fcitx"><a href="#配置-fcitx" class="headerlink" title="配置 fcitx"></a>配置 fcitx</h2><pre><code>vi ~/.xprofile
+</code></pre><p>加入三行：</p>
+<pre><code>export XMODIFIERS=@im=fcitx
+export QT_IM_MODULE=fcitx
+export GTK_IM_MODULE=fcitx
+</code></pre><p>要注销下才能生效。</p>
+<p>fcitx 自带一个 <code>fcitx-diagnose</code><br>configure ui 和 xim 报的错误可以不管，其他都修正了，一般 fcitx 就 ok 了。</p>
+<h2 id="配置-oh-my-zsh"><a href="#配置-oh-my-zsh" class="headerlink" title="配置 oh-my-zsh"></a>配置 oh-my-zsh</h2><p>真是个好东西</p>
+<pre><code>curl -L http://install.ohmyz.sh | sh
+</code></pre><p>搞定</p>
+<h2 id="设置-gnome3"><a href="#设置-gnome3" class="headerlink" title="设置 gnome3"></a>设置 gnome3</h2><p>装个 GNOME tweak tool 先  </p>
+<pre><code>sudo pacman -S gnome-tweak-tool
+</code></pre><p>进入设置里，Tweak Tools<br>Appearance 里，打开 Global Dark Theme，黑色才高大上嘛。<br>Desktop 里，打开 Icons on Desktop，桌面才能放图标。</p>
+<h2 id="一些小工具"><a href="#一些小工具" class="headerlink" title="一些小工具"></a>一些小工具</h2><p>iftop 查看流量的<br>aria2 命令行下载工具<br>xorg-xinput xinput 工具，编辑鼠标加速用<br>gedit gnome3 的文本编辑器  </p>
+<p>dosfstools 有了这个才有 mkfs.fat<br>ntfsprogs 有了这个才有 mkfs.ntfs  </p>
+<pre><code>sudo pacman -S iftop aria2 xorg-xinput gedit
+sudo pacman -S dosfstools
+sudo pacman -S ntfsprogs
+</code></pre><p>差不多就这些了。  </p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/archlinux/">archlinux</a>
+  </div>
+
+        
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Kommentare</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://kokutoukiritsugu.github.io/2015/02/17/archlinux-setup/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Suche">
+    <input type="hidden" name="q" value="site:kokutoukiritsugu.github.io">
+  </form>
+</div>
+
+  
+<div class="widget tag">
+  <h3 class="title">Kategorien</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/android/">android</a><small>2</small></li>
+  
+    <li><a href="/categories/archlinux/">archlinux</a><small>3</small></li>
+  
+    <li><a href="/categories/git/">git</a><small>3</small></li>
+  
+    <li><a href="/categories/hexo/">hexo</a><small>2</small></li>
+  
+    <li><a href="/categories/markdown/">markdown</a><small>1</small></li>
+  
+    <li><a href="/categories/octopress/">octopress</a><small>3</small></li>
+  
+    <li><a href="/categories/ubuntu/">ubuntu</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2016 黑桐切嗣
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+<script type="text/javascript">
+var disqus_shortname = 'kokutoukiritsugu';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
